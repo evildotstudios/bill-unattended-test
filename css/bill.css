@@ -1,0 +1,6 @@
+.totalValue {
+	font-size: 20px;
+}
+.totalValue.Numbers {
+	font-weight: bold;
+}
