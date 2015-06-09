@@ -47,7 +47,7 @@
 		<div class="row">
 			<div class="col-md-6">
 				<h2>Calls</h2>
-				<table class="table">
+				<table class="table callList">
 					<tr>
 						<th>Date</th>
 						<th>Number</th>
