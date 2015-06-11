@@ -10,7 +10,7 @@
 <body>
 	<div class="container">
 		<div class="row">
-			<h1>Your Bill</h1>
+			<h1><img src="images/sky-logo.png" alt=""> Your Bill</h1>
 		</div>
 		<div class="row">
 			<div class="col-md-8">
@@ -36,40 +36,20 @@
 				<span class="totalValue Label">Total</span>
 				<span class="totalValue Numbers">£<?php echo e($data->total); ?></span>
 			</div>
-			<div class="col-md-4">
+			<div class="col-md-4" id="dateDetail">
 
-				<strong>Generated:</strong> <?php echo e($data->statement->generated); ?><br />
-				<strong>Due:</strong> <?php echo e($data->statement->due); ?><br />
-				<strong>Billing Period:</strong><br />
-				<?php echo e($data->statement->period->from); ?> <strong>to</strong> <?php echo e($data->statement->period->to); ?>
+				<p class="dateDetailItem"><strong>Generated:</strong> <?php echo e($data->statement->generated); ?><br /></p>
+				<p class="dateDetailItem"><strong>Due:</strong> <?php echo e($data->statement->due); ?><br /></p>
+				<p class="dateDetailItem">
+					<strong>Billing Period:</strong><br />
+					<?php echo e($data->statement->period->from); ?> <strong>to</strong> <?php echo e($data->statement->period->to); ?>
 
+				</p>
 			</div>
 		</div>
 		<div class="row">
 			<div class="col-md-6">
-				<h2>Calls</h2>
-				<table class="table callList">
-					<tr>
-						<th>Date</th>
-						<th>Number</th>
-						<th>Duration</th>
-						<th>Cost</th>
-					</tr>
-					<?php if(count($data->callCharges->calls)<1): ?>
-						<tr>
-							<td colspan="4"><em>No calls registered for the period</em></td>
-						</tr>
-					<?php else: ?>
-						<?php foreach($data->callCharges->calls as $call): ?>
-							<tr>
-								<td>-</td>
-								<td><?php echo e($call->called); ?></td>
-								<td><?php echo e($call->duration); ?></td>
-								<td><?php echo e(money_format('%i',$call->cost)); ?></td>
-							</tr>
-						<?php endforeach; ?>
-					<?php endif; ?>
-				</table>
+				<?php echo $__env->make('calls', array_except(get_defined_vars(), array('__data', '__path')))->render(); ?>;
 			</div>
 			<div class="col-md-6">
 				<h2>Pay per View</h2>

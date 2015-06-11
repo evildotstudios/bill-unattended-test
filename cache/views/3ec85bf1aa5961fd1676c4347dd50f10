@@ -1,0 +1,42 @@
+<h2>Calls</h2>
+<table class="table callList">
+	<tr>
+		<th>Number</th>
+		<th>Duration</th>
+		<th>Cost</th>
+	</tr>
+	<?php if(count($data->callCharges->calls)<1): ?>
+		<tr>
+			<td colspan="4"><em>No calls registered for the period</em></td>
+		</tr>
+	<?php else: ?>
+		<?php foreach($data->callCharges->calls as $title => $calls): ?>
+		<div <?php if($title != 'page_1'): ?> class="hide" <?php endif; ?>>
+			<?php foreach($calls as $call): ?>
+			<tr>
+				<td><?php echo e($call->called); ?></td>
+				<td><?php echo e($call->duration); ?></td>
+				<td><?php echo e(money_format('%i',$call->cost)); ?></td>
+			</tr>
+			<?php endforeach; ?>
+		</div>
+		<?php endforeach; ?>
+	<?php endif; ?>
+</table>
+<nav>
+  <ul class="pagination">
+    <li>
+      <a href="#" aria-label="Previous">
+        <span aria-hidden="true">&laquo;</span>
+      </a>
+    </li>
+    <?php foreach($data->callCharges->calls as $title => $call): ?>
+		    <li><a href="#"><?php echo e($title); ?></a></li>
+	<?php endforeach; ?>
+    <li>
+      <a href="#" aria-label="Next">
+        <span aria-hidden="true">&raquo;</span>
+      </a>
+    </li>
+  </ul>
+</nav>

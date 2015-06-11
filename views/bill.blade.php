@@ -10,7 +10,7 @@
 <body>
 	<div class="container">
 		<div class="row">
-			<h1>Your Bill</h1>
+			<h1><img src="images/sky-logo.png" alt=""> Your Bill</h1>
 		</div>
 		<div class="row">
 			<div class="col-md-8">
@@ -36,39 +36,19 @@
 				<span class="totalValue Label">Total</span>
 				<span class="totalValue Numbers">£{{$data->total}}</span>
 			</div>
-			<div class="col-md-4">
+			<div class="col-md-4" id="dateDetail">
 
-				<strong>Generated:</strong> {{$data->statement->generated}}<br />
-				<strong>Due:</strong> {{$data->statement->due}}<br />
-				<strong>Billing Period:</strong><br />
-				{{$data->statement->period->from}} <strong>to</strong> {{$data->statement->period->to}}
+				<p class="dateDetailItem"><strong>Generated:</strong> {{$data->statement->generated}}<br /></p>
+				<p class="dateDetailItem"><strong>Due:</strong> {{$data->statement->due}}<br /></p>
+				<p class="dateDetailItem">
+					<strong>Billing Period:</strong><br />
+					{{$data->statement->period->from}} <strong>to</strong> {{$data->statement->period->to}}
+				</p>
 			</div>
 		</div>
 		<div class="row">
 			<div class="col-md-6">
-				<h2>Calls</h2>
-				<table class="table callList">
-					<tr>
-						<th>Date</th>
-						<th>Number</th>
-						<th>Duration</th>
-						<th>Cost</th>
-					</tr>
-					@if(count($data->callCharges->calls)<1)
-						<tr>
-							<td colspan="4"><em>No calls registered for the period</em></td>
-						</tr>
-					@else
-						@foreach($data->callCharges->calls as $call)
-							<tr>
-								<td>-</td>
-								<td>{{$call->called}}</td>
-								<td>{{$call->duration}}</td>
-								<td>{{money_format('%i',$call->cost)}}</td>
-							</tr>
-						@endforeach
-					@endif
-				</table>
+				@include('calls');
 			</div>
 			<div class="col-md-6">
 				<h2>Pay per View</h2>
